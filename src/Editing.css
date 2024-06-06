@@ -1,0 +1,59 @@
+.App {
+  background-color: antiquewhite;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* ------ HEADING / TITLE ------ */
+.headingBar {
+  height: 100px;
+}
+.headingBar header {
+  color: #282c34;
+  font-size: 50px;
+  font-weight: 900;
+  text-shadow: 0 0 20px #4e5461;
+}
+/* ------ INPUT AREA ------ */
+.input-area {
+  width: 90%;
+}
+.input-row {
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+}
+.connect-button {
+  width: 90%;
+  background: none;
+  border-radius: 10px;
+  border-style: solid;
+  height: 60px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 2px;
+}
+.connect-button:hover {
+  background: rgb(226, 213, 195);
+}
+/* ------ FOOTER / CREATE ------ */
+.footer {
+  height: 100px;
+}
+.footer button {
+  background: rgba(0, 0, 0, 0.05);
+  height: 40px;
+  width: 120px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: #4e5461;
+  padding: 0;
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 20px;
+}
