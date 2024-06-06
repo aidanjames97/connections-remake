@@ -1,70 +1,68 @@
 import './Playing.css';
 import React, { useState } from 'react';
 
-function App() {
+export default function Playing() {
+  const one = [(1, 'one'), (1, 'two'), (1, 'three'), (1, 'four')]
+  const two = [(2, 'apple'), (2, 'banana'), (2, 'grape'), (2, 'pear')]
+  const three = [(3, 'shirt'), (3, 'pants'), (3, 'socks'), (3, 'underwear')]
+  const four = [(4, 'CPU'), (4, 'GPU'), (4, 'RAM'), (4, 'Motherboard')]
+
   return (
-    <div className="App">
-      <div className='headingBar'>
+    <div className="Playing">
+      <div className='heading-bar'>
         <header>Connections</header>
       </div>
 
       <div className='game'>
-        <GameArea/>
+        <GameArea first={one} second={two} third={three} fourth={four} />
       </div>
 
-      <div className='lives'>
+      <div className='footer'>
         <LivesLeft/>
+        <BottomButtons possible={'yes'}/>
       </div>
     </div>
   );
 }
 
-export default App;
 // game area of app
-function GameArea() {
+function GameArea({ first, second, third, fourth }) {
   return (
-    <div>
-      <ButtonRow/>
-      <ButtonRow/>
-      <ButtonRow/>
-      <ButtonRow/>
-    </div>
-  )
-}
-// row of connection boxes
-function ButtonRow() {
-  return (
-    <div>
-      <ConnectButton/>
-      <ConnectButton/>
-      <ConnectButton/>
-      <ConnectButton/>
+    <div className='game-area'>
+      <div className='game-row'>
+        {first.map((value) => (
+          <ConnectButton value={value}/>
+        ))}
+      </div>
+      <div className='game-row'>
+        {second.map((value) => (
+          <ConnectButton value={value}/>
+        ))}
+      </div>
+      <div className='game-row'>
+        {third.map((value) => (
+          <ConnectButton value={value}/>
+        ))}
+      </div>
+      <div className='game-row'>
+        {fourth.map((value) => (
+          <ConnectButton value={value}/>
+        ))}
+      </div>
     </div>
   )
 }
 
-const Textbox = () => {
-  const [inputValue, setInputValue] = useState('');
-  const handleChange = (event) => {
-      setInputValue(event.target.value);
-  };
-  return (
-      <div className='textboxContain'>
-          <input 
-              type="text" 
-              value={inputValue} 
-              onChange={handleChange} 
-              placeholder="----" 
-          />
-      </div>
-  );
-};
 
 // each individual "connection box"
-function ConnectButton() {
-  return (
-    <button className='connectionBox'>{<Textbox/>}</button>
-  )
+function ConnectButton({ value }) {
+    return (
+      <button 
+        className='connectionBox'
+      >
+        {value}
+      </button>
+    )
 }
 
 function LivesLeft() {
@@ -81,16 +79,16 @@ function LivesLeft() {
 
 function Heart() {
     return (
-      <p className='dot'>&hearts;</p>
+      <b className='dot'>&hearts;</b>
     )
   }
 
-function BottomButtons() {
-    return (
-      <div>
-        <button>Shuffle</button>
-        <button>Deselect All</button>
-        <button>Submit</button>
-      </div>
-    )
-  }
+function BottomButtons({ possible }) {
+  return (
+    <div className='Bottom-button'>
+      <button>Shuffle</button>
+      <button>Deselect All</button>
+      <button className={possible}>Submit</button>
+    </div>
+  )
+}

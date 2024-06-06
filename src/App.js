@@ -1,67 +1,34 @@
-import './App.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import Playing from "./Playing.js"
+import Editing from "./Editing.js"
+import "./App.css"
 
-function App() {
+export default function App() {
+  const [editMode, setEditMode] = useState(false)
+
+  function handleToggle() {
+    setEditMode(!editMode)
+  }
+
+  if(editMode) {
+    return (
+      <>
+        <Editing />
+        <EditButton value={'Play'} toggleChange={handleToggle}/>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Playing />
+        <EditButton value={'Edit'} toggleChange={handleToggle}/>
+      </>
+    );
+  }
+}
+
+function EditButton({ value, toggleChange }) {
   return (
-    <div className="App">
-      <div className='headingBar'>
-        <header>Connections</header>
-      </div>
-
-      <div className='game'>
-        <GameArea/>
-      </div>
-      <div className='footer'>
-        <button>Create</button>
-      </div>
-    </div>
+    <button className='edit-toggle' onClick={toggleChange}>{value}</button>
   );
-}
-
-export default App;
-// game area of app
-function GameArea() {
-  return (
-    <div>
-      <ButtonRow/>
-      <ButtonRow/>
-      <ButtonRow/>
-      <ButtonRow/>
-    </div>
-  )
-}
-// row of connection boxes
-function ButtonRow() {
-  return (
-    <div>
-      <ConnectButton/>
-      <ConnectButton/>
-      <ConnectButton/>
-      <ConnectButton/>
-    </div>
-  )
-}
-
-const Textbox = () => {
-  const [inputValue, setInputValue] = useState('');
-  const handleChange = (event) => {
-      setInputValue(event.target.value);
-  };
-  return (
-      <div className='textboxContain'>
-          <input 
-              type="text" 
-              value={inputValue} 
-              onChange={handleChange} 
-              placeholder="----" 
-          />
-      </div>
-  );
-};
-
-// each individual "connection box"
-function ConnectButton() {
-  return (
-    <button className='connectionBox'>{<Textbox/>}</button>
-  )
 }
