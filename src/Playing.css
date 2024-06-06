@@ -1,0 +1,17 @@
+.livesLeft {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+.livesLeft b {
+    margin-top: 21px;
+    margin-right: 5px;
+}
+.dot {
+    font-size: 20px;
+    color: #282c34;
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 50px;
+}

@@ -1,4 +1,4 @@
-import './App.css';
+import './Playing.css';
 import React, { useState } from 'react';
 
 function App() {
@@ -11,8 +11,9 @@ function App() {
       <div className='game'>
         <GameArea/>
       </div>
-      <div className='footer'>
-        <button>Create</button>
+
+      <div className='lives'>
+        <LivesLeft/>
       </div>
     </div>
   );
@@ -65,3 +66,31 @@ function ConnectButton() {
     <button className='connectionBox'>{<Textbox/>}</button>
   )
 }
+
+function LivesLeft() {
+    return (
+      <div className='livesLeft'>
+        <b>Lives Remaining:</b>
+        <Heart/>
+        <Heart/>
+        <Heart/>
+        <Heart/>
+      </div>
+    )
+  }
+
+function Heart() {
+    return (
+      <p className='dot'>&hearts;</p>
+    )
+  }
+
+function BottomButtons() {
+    return (
+      <div>
+        <button>Shuffle</button>
+        <button>Deselect All</button>
+        <button>Submit</button>
+      </div>
+    )
+  }
