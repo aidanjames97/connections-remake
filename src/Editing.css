@@ -1,4 +1,4 @@
-.App {
+.Editing {
   background-color: antiquewhite;
   overflow: hidden;
   height: 100vh;
@@ -7,53 +7,72 @@
   justify-content: center;
   align-items: center;
 }
+.game-area {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+}
 /* ------ HEADING / TITLE ------ */
-.headingBar {
+.heading-bar {
   height: 100px;
 }
-.headingBar header {
-  color: #282c34;
+.heading-bar header {
+  margin-top: 25px;
   font-size: 50px;
   font-weight: 900;
-  text-shadow: 0 0 20px #4e5461;
+  text-shadow: 0 0 4px blueviolet;
 }
+
 /* ------ INPUT AREA ------ */
 .input-area {
-  width: 90%;
-}
-.input-row {
   display: flex;
-  flex-direction: row;
-  margin-left: 5%;
+  flex-direction: column;
+  align-items: center;
+}
+.input-area input {
+  width: 50%;
+  margin-bottom: 5px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px blueviolet;
 }
 .connect-button {
-  width: 90%;
-  background: none;
-  border-radius: 10px;
-  border-style: solid;
-  height: 60px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 20px;
-  margin: 2px;
-}
-.connect-button:hover {
-  background: rgb(226, 213, 195);
-}
-/* ------ FOOTER / CREATE ------ */
-.footer {
-  height: 100px;
-}
-.footer button {
+  transition: ease-in-out .2s;
   background: rgba(0, 0, 0, 0.05);
-  height: 40px;
-  width: 120px;
+  height: 104px;
+  width: 134px;
   border-style: solid;
   border-width: 2px;
   border-radius: 10px;
   border-color: #4e5461;
   padding: 0;
-  margin-top: 20px;
-  font-weight: 700;
-  font-size: 20px;
+  margin: 2px;
+}
+.connect-button:hover {
+  transition: ease-in-out .2s;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.1); 
+}
+
+/* ------ FOOTER / CREATE ------ */
+.bottom-buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+.bottom-buttons button {
+  transition: ease-in-out .2s;
+  width: 120px;
+  height: 40px;
+  border-style: solid;
+  border-radius: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  background:rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0 4px blueviolet;
 }
