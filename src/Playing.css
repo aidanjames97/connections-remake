@@ -96,6 +96,8 @@
     border-color: #4e5461;
     padding: 0;
     margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
 }
 .connect-button:hover {
     transition: ease-in-out .2s;
@@ -103,7 +105,7 @@
     background: rgba(0, 0, 0, 0.1); 
 }
 .connect-button-selected {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.5);
     transition: ease-in-out .2s;
     height: 104px;
     width: 134px;
@@ -113,4 +115,122 @@
     border-color: #4e5461;
     padding: 0;
     margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-selected:hover {
+    cursor: pointer;
+}
+/* each color change when correct words are submitted */
+.connect-button-green {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-selected-green {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-yellow {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-selected-yellow {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-blue {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-selected-blue {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-purple {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
+}
+.connect-button-selected-purple {
+    background: green;
+    transition: ease-in-out .2s;
+    height: 104px;
+    width: 134px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: #4e5461;
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+    font-weight: 900;
 }

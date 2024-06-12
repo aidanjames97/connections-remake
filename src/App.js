@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Playing from "./Playing.js"
 import Editing from "./Editing.js"
 import "./App.css"
@@ -10,10 +10,10 @@ export default function App() {
   const words = ['one', 'two', 'three', 'four', 'apple', 'banana', 'grape', 'pear', 'shirt', 'pants', 'socks', 'underwear', 'CPU', 'GPU', 'RAM', 'Motherboard']
 
   // correct word configs
-  const one = ['one', 'two', 'three', 'four'];
-  const two = ['apple', 'banana', 'grape', 'pear'];
-  const three = ['shirt', 'pants', 'socks', 'underwear'];
-  const four = ['CPU', 'GPU', 'RAM', 'Motherboard'];
+  const one = ['ONE', 'TWO', 'THREE', 'FOUR'];
+  const two = ['APPLE', 'BANANA', 'GRAPE', 'PEAR'];
+  const three = ['SHIRT', 'PANTS', 'SOCKS', 'UNDERWEAR'];
+  const four = ['CPU', 'GPU', 'RAM', 'MOTHERBOARD'];
 
   function handleToggle() {
     setEditMode(!editMode)

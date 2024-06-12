@@ -23,6 +23,7 @@ const [words, setWords] = useState([Array(16).fill(null)])
         >
         </input>
         <b>{inputText}</b>
+        {/* tofo */}
         <div className='game-area'>
           <ConnectButton value={words[0]} onConnectClick={() => handleClick(0)}/>
           <ConnectButton value={words[1]} onConnectClick={() => handleClick(1)}/>
@@ -36,7 +37,7 @@ const [words, setWords] = useState([Array(16).fill(null)])
           <ConnectButton value={words[9]} onConnectClick={() => handleClick(9)}/>
           <ConnectButton value={words[10]} onConnectClick={() => handleClick(10)}/>
           <ConnectButton value={words[11]} onConnectClick={() => handleClick(11)}/>
-          <ConnectButton value={words[12]} onConnectClick={() => handleClick(8)}/>
+          <ConnectButton value={words[12]} onConnectClick={() => handleClick(8)}/> 
           <ConnectButton value={words[13]} onConnectClick={() => handleClick(9)}/>
           <ConnectButton value={words[14]} onConnectClick={() => handleClick(10)}/>
           <ConnectButton value={words[15]} onConnectClick={() => handleClick(11)}/>
