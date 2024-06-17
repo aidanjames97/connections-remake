@@ -2,11 +2,11 @@ import './Playing.css';
 import React, { useState } from 'react';
 
 export default function Playing({ input, one, two, three, four }) {
-  let count = 0; // used for keys
-  const [words, setWords] = useState(input.map(str => [str.toUpperCase(), false, count++, 'color'])) // adding false and key to words array
+  const [words, setWords] = useState(input.map(str => [str.toUpperCase(), false, 'color'])) // adding false and key to words array
   const [lives, setLives] = useState(4) // hook for amount of lives player has remaining
-  const [selected, setSelected] = useState([Array(4).fill(null)]) // hook for boxes used has selected
+  const [selected, setSelected] = useState([]) // hook for boxes used has selected
   const [numSelected, setNumSelected] = useState(0) // hook for how may boxes uses has selected
+  const [shuffled, setShuffled] = useState(false) // as to only shuffle once per load
 
   // to change but working
   function lifeHandle() {
@@ -34,7 +34,7 @@ export default function Playing({ input, one, two, three, four }) {
         const index = subWords.indexOf(one[i])
         // setting color
         const tmp = words
-        tmp[index][3] = 'green';
+        tmp[index][2] = 'green';
         setWords(tmp)
       }
       handleDeselect() 
@@ -48,7 +48,7 @@ export default function Playing({ input, one, two, three, four }) {
         const index = subWords.indexOf(two[i])
         // setting color
         const tmp = words
-        tmp[index][3] = 'yellow';
+        tmp[index][2] = 'yellow';
         setWords(tmp)
       }
       handleDeselect()
@@ -62,7 +62,7 @@ export default function Playing({ input, one, two, three, four }) {
         const index = subWords.indexOf(three[i])
         // setting color
         const tmp = words
-        tmp[index][3] = 'blue';
+        tmp[index][2] = 'blue';
         setWords(tmp)
       }
       handleDeselect()
@@ -73,10 +73,10 @@ export default function Playing({ input, one, two, three, four }) {
       for(let i = 0;i < 4; i++) {
         // getting index
         const subWords = words.map(subArr => subArr[0])
-        const index = subWords.indexOf(two[i])
+        const index = subWords.indexOf(four[i])
         // setting color
         const tmp = words
-        tmp[index][3] = 'purple';
+        tmp[index][2] = 'purple';
         setWords(tmp)
       }
       handleDeselect()
@@ -98,25 +98,28 @@ export default function Playing({ input, one, two, three, four }) {
   const p = possible()
   // deselecting all selected connect boxes
   function handleDeselect() {
-    const len = selected.length // getting length of 
+    const len = selected.length // getting length of selected boxes array
+    if(len !== 0) {
+      for(let i = 0; i < len; i++) {
+        const indexArry = words.map(subArr => subArr[0])
+        const index = indexArry.indexOf(selected[i])
+        const tmp = words
+        tmp[index][1] = false
+        setSelected(tmp)
+      }
 
-    for(let i = 0; i < len; i++) {
-      const indexArry = words.map(subArr => subArr[0])
-      const index = indexArry.indexOf(selected[i])
-      const tmp = words
-      tmp[index][1] = false
-      setSelected(tmp)
+      setNumSelected(0) // set numSelected to 0
+      const t = []
+      setSelected(t) // remove all elems from selected array
     }
-
-    setNumSelected(0) // set numSelected to 0
-    const t = Array(4)
-    setSelected(t) // remove all elems from selected array
   }
   // handling click of connect box
-  function handleClick(value, keyProp) {
+  function handleClick(value) {
     // changing words select element
     const tmp = words
-    tmp[keyProp][1] = !tmp[keyProp][1]
+    const indexArry = words.map(subArr => subArr[0])
+    const indexFind = indexArry.indexOf(value)
+    tmp[indexFind][1] = !tmp[indexFind][1]
     setWords(tmp)
     // used if box already selected (can always deselect)
     const index = selected.indexOf(value) // index in selected
@@ -143,17 +146,25 @@ export default function Playing({ input, one, two, three, four }) {
     }
   }
 
-  // NEED TO MAKE IT SO EACH RELOAD WILL NOT SHUFFLE ARRAY
+  // shuffle array only at start or when user requests
   function handleShuffle() {
-    const shuffleArray = (array) => {
-      const shuffledArray = array.slice(); // Create a copy of the array
-      for (let i = shuffledArray.length - 1; i > 0; i--) {
+    if(!shuffled) {
+      setShuffled(true)
+      let newArray = words.slice(); // Create a copy of the array
+      for (let i = newArray.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]]
       }
-      return shuffledArray;
-    };
-    words = shuffleArray.map(str => [str, false, count++])
+      setWords(newArray);
+    }
+  }
+
+  function updateMe() {
+    console.log("num selected: " + numSelected)
+    console.log("-- Selected Array --")
+    console.log(selected)
+    console.log("-- Words Array --")
+    console.log(words)
   }
 
   // what is to be displayed  
@@ -170,7 +181,13 @@ export default function Playing({ input, one, two, three, four }) {
       <div className='footer'>
         <LivesLeft lives={lives}/>
         <div className='bottom-buttons'>
-          <BottomButtons handleShuffle={handleShuffle} handleLifeLoss={lifeHandle} handleDeselect={handleDeselect} />
+          <BottomButtons 
+            handleShuffle={handleShuffle} 
+            handleLifeLoss={lifeHandle} 
+            handleDeselect={handleDeselect} 
+            setShuffled={setShuffled} 
+            updateMe={updateMe}
+          />
           <SubmitButton possible={p} handleSubmit={handleSubmit} />
         </div>
       </div>
@@ -182,39 +199,52 @@ export default function Playing({ input, one, two, three, four }) {
 function GameArea({ words, handleClickGame }) {
   return (
     <div className='game-area'>
-      {words.map((value) => (
-        <ConnectButton value={value[0]} handleClickConnect={handleClickGame} select={value[1]} key={value[2]} keyProp={value[2]} color={value[3]} />
+      {words.map((value, index) => (
+        <ConnectButton key={index} value={value[0]} handleClickConnect={handleClickGame} select={value[1]} color={value[2]} />
       ))}
     </div>
   )
 }
 
 // each individual "connection box"
-function ConnectButton({ value, handleClickConnect, select, keyProp, color}) {
-  var toAdd = ''
-  if(color != 'color') {
+function ConnectButton({ value, handleClickConnect, select, color}) {
+  let toAdd = '' // init empty
+  // check if we have specified a color
+  if(color !== 'color') {
     toAdd = '-' + color
   }
+  // check if connect box is selected
   if(select) {
-    const classString = 'connect-button-selected' + toAdd
     return (
       <button
-        className={classString}
-        onClick={() => handleClickConnect(value, keyProp)}
+        className='connect-button-selected'
+        onClick={() => handleClickConnect(value)}
       >
         {value}
       </button>
     );
   } else {
+    // not selected
     const classString = 'connect-button' + toAdd
-    return (
-      <button
-        className={classString}
-        onClick={() => handleClickConnect(value, keyProp)}
-      >
-        {value}
-      </button>
-    );
+    if (toAdd === '') {
+      // no onClick option as here box is already correct
+      return (
+        <button
+          className={classString}
+          onClick={() => handleClickConnect(value)}
+        >
+          {value}
+        </button>
+      );
+    } else {
+      return (
+        <button
+          className={classString}
+        >
+          {value}
+        </button>
+      );
+    }
   }
 }
 
@@ -243,11 +273,18 @@ function Heart() {
 }
 
 // returns shuffle, deselect, and submit buttons
-function BottomButtons({ handleShuffle, handleLifeLoss, handleDeselect}) {
+function BottomButtons({ handleShuffle, handleLifeLoss, handleDeselect, setShuffled, updateMe}) {
+  function handleShuffleLocal() {
+    // user requested shuffle
+    setShuffled(false)
+    handleShuffle()
+  }
+
   return (
     <div className='shuffle-deselect'>
-      <button onClick={handleShuffle}>Shuffle</button>
+      <button onClick={handleShuffleLocal}>Shuffle</button>
       <button onClick={handleDeselect}>Deselect All</button>
+      <button onClick={updateMe}>Print</button>
     </div>
   )
 }

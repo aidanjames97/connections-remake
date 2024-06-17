@@ -71,12 +71,16 @@
     background: rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
-.submit-active button {
+.submit-active {
     transition: ease-in-out .2s;
     background: rgba(0, 0, 0, 0.4);
     box-shadow: 0 0 4px blueviolet;
     font-size: 15px;
     font-weight: 600;
+}
+.submit-active:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 .submit-inactive {
     opacity: 50%;
@@ -123,21 +127,7 @@
 }
 /* each color change when correct words are submitted */
 .connect-button-green {
-    background: green;
-    transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
-    font-size: 14px;
-    font-weight: 900;
-}
-.connect-button-selected-green {
-    background: green;
+    background: lightgreen;
     transition: ease-in-out .2s;
     height: 104px;
     width: 134px;
@@ -151,21 +141,7 @@
     font-weight: 900;
 }
 .connect-button-yellow {
-    background: green;
-    transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
-    font-size: 14px;
-    font-weight: 900;
-}
-.connect-button-selected-yellow {
-    background: green;
+    background: rgb(255, 255, 147);
     transition: ease-in-out .2s;
     height: 104px;
     width: 134px;
@@ -179,21 +155,7 @@
     font-weight: 900;
 }
 .connect-button-blue {
-    background: green;
-    transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
-    font-size: 14px;
-    font-weight: 900;
-}
-.connect-button-selected-blue {
-    background: green;
+    background: lightskyblue;
     transition: ease-in-out .2s;
     height: 104px;
     width: 134px;
@@ -207,21 +169,7 @@
     font-weight: 900;
 }
 .connect-button-purple {
-    background: green;
-    transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
-    font-size: 14px;
-    font-weight: 900;
-}
-.connect-button-selected-purple {
-    background: green;
+    background: rgb(255, 124, 255);
     transition: ease-in-out .2s;
     height: 104px;
     width: 134px;
