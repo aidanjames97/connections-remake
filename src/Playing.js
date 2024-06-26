@@ -6,13 +6,14 @@ export default function Playing({ input, one, two, three, four }) {
   const [lives, setLives] = useState(4) // hook for amount of lives player has remaining
   const [selected, setSelected] = useState([]) // hook for boxes used has selected
   const [numSelected, setNumSelected] = useState(0) // hook for how may boxes uses has selected
-  const [shuffled, setShuffled] = useState(false) // as to only shuffle once per load
+  const [completed, setCompleted] = useState(Array)
+  const [display, setDisplay] = useState(words)
 
   // to change but working
   function lifeHandle() {
     setLives(lives - 1)
   }
-  // checking if arrays match
+  // checking if arrays match (helper function)
   function checkArray(user, arr) {
     const sortedUser = user.slice().sort();
     const sortedArr = arr.slice().sort();
@@ -24,20 +25,47 @@ export default function Playing({ input, one, two, three, four }) {
     }
     return true; 
   }
-  // on submit click
+  // called to organize arrays and update display
+  function newUpdate() {
+    let tmp = [] // empty array
+    for(let i=0; i < completed.length; i++) {
+      tmp.push(completed[i])
+    } // completed array added to display
+    for(let i=0; i < words.length; i++) {
+      tmp.push(words[i])
+    } // rest of words added
+    setDisplay(tmp)
+  }
+  // checking if play has completed connections
+  function checkWin() {
+    if (words.length === 0) {
+      // if words empty, user has won
+      alert("YOU WON")
+    }
+  }
+  // on submit click, checks for correct and win
   function handleSubmit() {
+    let tmpWords = words
+    let tmpComp = completed
+
     if(checkArray(selected, one)) {
       // one correct, change color value and deselect
       for(let i = 0;i < 4; i++) {
         // getting index
         const subWords = words.map(subArr => subArr[0])
         const index = subWords.indexOf(one[i])
-        // setting color
-        const tmp = words
-        tmp[index][2] = 'green';
-        setWords(tmp)
+
+        let tmp = words[index]; // pushing word to tmp array
+        tmpWords.splice(index, 1) // removes elem at index from words
+        setWords(tmpWords) // setting words
+        tmp[1] = false // deselecting
+        tmp[2] = 'green'; // setting color
+        tmpComp.push(tmp) // push new elem to completed tmp array
       }
-      handleDeselect() 
+      setCompleted(tmpComp)
+      newUpdate()
+      handleDeselect()
+      checkWin()
       return;
     }
     if(checkArray(selected, two)) {
@@ -46,12 +74,18 @@ export default function Playing({ input, one, two, three, four }) {
         // getting index
         const subWords = words.map(subArr => subArr[0])
         const index = subWords.indexOf(two[i])
-        // setting color
-        const tmp = words
-        tmp[index][2] = 'yellow';
-        setWords(tmp)
+
+        let tmp = words[index]; // pushing word to tmp array
+        tmpWords.splice(index, 1) // removes elem at index from words
+        setWords(tmpWords) // setting words
+        tmp[1] = false // deselecting
+        tmp[2] = 'yellow'; // setting color
+        tmpComp.push(tmp) // push new elem to completed tmp array
       }
+      setCompleted(tmpComp)
+      newUpdate()
       handleDeselect()
+      checkWin()
       return;
     }
     if(checkArray(selected, three)) {
@@ -60,12 +94,18 @@ export default function Playing({ input, one, two, three, four }) {
         // getting index
         const subWords = words.map(subArr => subArr[0])
         const index = subWords.indexOf(three[i])
-        // setting color
-        const tmp = words
-        tmp[index][2] = 'blue';
-        setWords(tmp)
+
+        let tmp = words[index]; // pushing word to tmp array
+        tmpWords.splice(index, 1) // removes elem at index from words
+        setWords(tmpWords) // setting words
+        tmp[1] = false // deselecting
+        tmp[2] = 'blue'; // setting color
+        tmpComp.push(tmp) // push new elem to completed tmp array
       }
+      setCompleted(tmpComp)
+      newUpdate()
       handleDeselect()
+      checkWin()
       return;
     }
     if(checkArray(selected, four)) {
@@ -74,40 +114,53 @@ export default function Playing({ input, one, two, three, four }) {
         // getting index
         const subWords = words.map(subArr => subArr[0])
         const index = subWords.indexOf(four[i])
-        // setting color
-        const tmp = words
-        tmp[index][2] = 'purple';
-        setWords(tmp)
+
+        let tmp = words[index]; // pushing word to tmp array
+        tmpWords.splice(index, 1) // removes elem at index from words
+        setWords(tmpWords) // setting words
+        tmp[1] = false // deselecting
+        tmp[2] = 'purple'; // setting color
+        tmpComp.push(tmp) // push new elem to completed tmp array
       }
+      setCompleted(tmpComp)
+      newUpdate()
       handleDeselect()
+      checkWin()
       return;
     }
     // selected words do not match, take life and notify
     lifeHandle()
-    console.log("not quite")
+    handleDeselect()
+    alert("Not Quite")
   }
   // checking if submition is possible
   function possible() {
-    if(numSelected === 4) {
-      return 'yes'
-    } else {
-      return 'no'
-    }
+    if(numSelected === 4) { return true }
+    return false
   }
   // called each update for button change
-  const p = possible()
+  const p = possible();
+  // checking if deselect is possible
+  function deslPossible() {
+    if(selected.length > 0) { return true }
+    return false
+  }
+  const d = deslPossible();
   // deselecting all selected connect boxes
   function handleDeselect() {
     const len = selected.length // getting length of selected boxes array
     if(len !== 0) {
       for(let i = 0; i < len; i++) {
-        const indexArry = words.map(subArr => subArr[0])
-        const index = indexArry.indexOf(selected[i])
-        const tmp = words
-        tmp[index][1] = false
-        setSelected(tmp)
+        const indexArry = words.map(subArr => subArr[0]) // change to words only
+        const index = indexArry.indexOf(selected[i]) // try and find index
+        // checking if words exist in words array
+        if(index !== -1) {
+          const tmp = words
+          tmp[index][1] = false
+          setSelected(tmp)
+        }
       }
-
+      // words are now gone from words array
       setNumSelected(0) // set numSelected to 0
       const t = []
       setSelected(t) // remove all elems from selected array
@@ -145,29 +198,21 @@ export default function Playing({ input, one, two, three, four }) {
       return;
     }
   }
-
   // shuffle array only at start or when user requests
   function handleShuffle() {
-    if(!shuffled) {
-      setShuffled(true)
-      let newArray = words.slice(); // Create a copy of the array
-      for (let i = newArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [newArray[i], newArray[j]] = [newArray[j], newArray[i]]
-      }
-      setWords(newArray);
+    let newArray = words.slice(); // Create a copy of the array
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]]
     }
-  }
+    setWords(newArray);
+    newUpdate() // updating display
+  } 
+  
+  // ABOVE: helper, handler, logic functions
+  // BELOW: component functions
 
-  function updateMe() {
-    console.log("num selected: " + numSelected)
-    console.log("-- Selected Array --")
-    console.log(selected)
-    console.log("-- Words Array --")
-    console.log(words)
-  }
-
-  // what is to be displayed  
+  // displaying
   return (
     <div className="Playing">
       <div className='heading-bar'>
@@ -175,19 +220,14 @@ export default function Playing({ input, one, two, three, four }) {
       </div>
 
       <div className='game'>
-        <GameArea words={words} handleClickGame={handleClick} />
+        <GameArea display={display} handleClickGame={handleClick} />
       </div>
 
       <div className='footer'>
         <LivesLeft lives={lives}/>
         <div className='bottom-buttons'>
-          <BottomButtons 
-            handleShuffle={handleShuffle} 
-            handleLifeLoss={lifeHandle} 
-            handleDeselect={handleDeselect} 
-            setShuffled={setShuffled} 
-            updateMe={updateMe}
-          />
+          <ShuffleButton handleShuffle={handleShuffle}/>
+          <DeslButton deslPossible={d} handleDeselect={handleDeselect}/>
           <SubmitButton possible={p} handleSubmit={handleSubmit} />
         </div>
       </div>
@@ -196,10 +236,10 @@ export default function Playing({ input, one, two, three, four }) {
 }
 
 // game area of app, returns 4 rows of 4 connect buttons
-function GameArea({ words, handleClickGame }) {
+function GameArea({ display, handleClickGame }) {
   return (
     <div className='game-area'>
-      {words.map((value, index) => (
+      {display.map((value, index) => (
         <ConnectButton key={index} value={value[0]} handleClickConnect={handleClickGame} select={value[1]} color={value[2]} />
       ))}
     </div>
@@ -256,7 +296,7 @@ function LivesLeft({ lives }) {
   }
   return (
     <div className='livesLeft'>
-      <b>Lives Remaining:</b>
+      <b>Mistakes remaining:</b>
       {/* looping through lives, _ because we dont care about index */}
       {loopFunc.map((_, index) => (
         <Heart key={index}/>
@@ -268,31 +308,37 @@ function LivesLeft({ lives }) {
 // returns HTML heart as body tag
 function Heart() {
   return (
-    <b className='dot'>&hearts;</b>
+    <b className='heart'>&hearts;</b>
   )
 }
 
-// returns shuffle, deselect, and submit buttons
-function BottomButtons({ handleShuffle, handleLifeLoss, handleDeselect, setShuffled, updateMe}) {
-  function handleShuffleLocal() {
-    // user requested shuffle
-    setShuffled(false)
-    handleShuffle()
-  }
-
+// returns shuffle buttons
+function ShuffleButton({ handleShuffle }) {
   return (
-    <div className='shuffle-deselect'>
-      <button onClick={handleShuffleLocal}>Shuffle</button>
-      <button onClick={handleDeselect}>Deselect All</button>
-      <button onClick={updateMe}>Print</button>
+    <div className='shuffle'>
+      <button onClick={handleShuffle}>Shuffle</button>
     </div>
   )
+}
+
+// returns button depending on if user can deselect
+// deslPossible can be 'yes' for submittable, else will be deactive
+function DeslButton({ deslPossible, handleDeselect }) {
+  if(deslPossible) {
+    return (
+      <button className='deselect-active' onClick={handleDeselect}>Deselect All</button>
+    );
+  } else {
+    return (
+      <button className='deselect-inactive' >Deselect All</button>
+    );
+  }
 }
 
 // returns button depending on if it is possible for user to submit the selected boxes
 // possible can be 'yes' for submittable, else will be deactive
 function SubmitButton({ possible, handleSubmit }) {
-  if(possible === 'yes') {
+  if(possible) {
     return (
       <button onClick={handleSubmit} className='submit-active'>Submit</button>
     );

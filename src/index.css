@@ -1,9 +1,9 @@
-body {
+body, html {
   margin: 0;
-  font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: antiquewhite;
+  background-color: rgb(255, 255, 255);
 }
 
 code {

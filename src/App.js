@@ -29,7 +29,7 @@ export default function App() {
   } else {
     return (
       <>
-        <Playing input={words} one={one} two={two} three={three} four={four} />
+        <Playing input={words} one={one} two={two} three={three} four={four} initial={true} />
         <EditButton value={'Edit'} toggleChange={handleToggle}/>
       </>
     );
