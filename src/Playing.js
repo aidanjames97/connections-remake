@@ -9,6 +9,10 @@ export default function Playing({ input, one, two, three, four }) {
   const [completed, setCompleted] = useState(Array)
   const [display, setDisplay] = useState(words)
 
+  // for date display
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const date = new Date()
+
   // to change but working
   function lifeHandle() {
     setLives(lives - 1)
@@ -198,7 +202,7 @@ export default function Playing({ input, one, two, three, four }) {
       return;
     }
   }
-  // shuffle array only at start or when user requests
+  // shuffle array when user requests
   function handleShuffle() {
     let newArray = words.slice(); // Create a copy of the array
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -217,6 +221,7 @@ export default function Playing({ input, one, two, three, four }) {
     <div className="Playing">
       <div className='heading-bar'>
         <header>Connections</header>
+        <h2>{months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}</h2>
       </div>
 
       <div className='game'>

@@ -4,16 +4,14 @@ import Editing from "./Editing.js"
 import "./App.css"
 
 export default function App() {
-  const [editMode, setEditMode] = useState(false)
+  // state vars being init, written by Editing and read by Playing
+  const [editMode, setEditMode] = useState(true)
+  const [words, setWords] = useState()
+  const [one, setOne] = useState()
+  const [two, setTwo] = useState()
+  const [three, setThree] = useState()
+  const [four, setFour] = useState()
 
-  // temp arrays for value testing
-  const words = ['one', 'two', 'three', 'four', 'apple', 'banana', 'grape', 'pear', 'shirt', 'pants', 'socks', 'underwear', 'CPU', 'GPU', 'RAM', 'Motherboard']
-
-  // correct word configs
-  const one = ['ONE', 'TWO', 'THREE', 'FOUR'];
-  const two = ['APPLE', 'BANANA', 'GRAPE', 'PEAR'];
-  const three = ['SHIRT', 'PANTS', 'SOCKS', 'UNDERWEAR'];
-  const four = ['CPU', 'GPU', 'RAM', 'MOTHERBOARD'];
 
   function handleToggle() {
     setEditMode(!editMode)
@@ -22,23 +20,14 @@ export default function App() {
   if(editMode) {
     return (
       <>
-        <Editing />
-        <EditButton value={'Play'} toggleChange={handleToggle}/>
+        <Editing setWords={setWords} setOne={setOne} setTwo={setTwo} setThree={setThree} setFour={setFour} toggleChange={handleToggle} />
       </>
     );
   } else {
     return (
       <>
-        <Playing input={words} one={one} two={two} three={three} four={four} initial={true} />
-        <EditButton value={'Edit'} toggleChange={handleToggle}/>
+        <Playing input={words} one={one} two={two} three={three} four={four} />
       </>
     );
   }
-}
-
-// TO BE DELETED! AND REPLACE W SUMBIT BUTTON
-function EditButton({ value, toggleChange }) {
-  return (
-    <button className='edit-toggle' onClick={toggleChange}>{value}</button>
-  );
 }

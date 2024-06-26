@@ -7,23 +7,6 @@
     align-items: center;
 }
 
-/* ----- HEADING AREA ----- */
-.heading-bar {
-    height: 100px;
-}
-.heading-bar header {
-    margin-top: 25px;
-    font-size: 50px;
-    font-weight: 900;
-}
-
-/* ----- GAME AREA ----- */
-.game-area {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-}
-
 /* ----- LIVES REMAINING */
 .footer {
     margin-top: 10px;
@@ -104,8 +87,7 @@
     border-radius: 6px;
     border: none;
     box-sizing: border-box;
-    font-size: 18px;
-    line-height: 16px;
+    font-size: 14px;
     font-weight: 900;
     height: 100px;
     width: 130px;
@@ -121,70 +103,55 @@
     border-radius: 6px;
     border: none;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 16px;
     font-weight: 700;
     height: 100px;
     width: 130px;
     margin: 4px;
 }
-.connect-button-selected:hover {
-    cursor: pointer;
-}
 /* each color change when correct words are submitted */
 .connect-button-green {
-    background: lightgreen;
+    background: rgb(160, 195, 90);
     transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
+    border: none;
+    height: 100px;
+    width: 130px;
+    border-radius: 6px;
+    margin: 4px;
     font-size: 14px;
     font-weight: 900;
 }
 .connect-button-yellow {
-    background: rgb(255, 255, 147);
+    background: rgb(249, 223, 109);
     transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
+    border: none;
+    height: 100px;
+    width: 130px;
+    border-radius: 6px;
+    margin: 4px;
     font-size: 14px;
     font-weight: 900;
 }
 .connect-button-blue {
-    background: lightskyblue;
+    background: rgb(176, 196, 239);
     transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
+    border: none;
+    height: 100px;
+    width: 130px;
+    border-radius: 6px;
+    margin: 4px;
     font-size: 14px;
     font-weight: 900;
 }
 .connect-button-purple {
-    background: rgb(255, 124, 255);
+    background: rgb(186, 129, 197);
     transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
+    border: none;
+    height: 100px;
+    width: 130px;
+    border-radius: 6px;
+    margin: 4px;
     font-size: 14px;
     font-weight: 900;
 }
