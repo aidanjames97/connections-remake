@@ -7,24 +7,57 @@ export default function Editing({ setWords, setOne, setTwo, setThree, setFour, t
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const date = new Date()
 
-  let words = ['one', 'two', 'three', 'four', 'apple', 'banana', 'grape', 'pear', 'shirt', 'pants', 'socks', 'underwear', 'CPU', 'GPU', 'RAM', 'Motherboard']
-
-
-  function handleClick(i) {
-    // todo
-  }
+  // final array to be delivered
+  const [out, setOut] = useState()
+  // four categories
+  const [first, setFirst] = useState()
+  const [second, setSecond] = useState()
+  const [third, setThird] = useState()
+  const [fourth, setFourth] = useState()
 
   // logic when user clicks create (make connections)
   function handleCreate() {
-    // todo
-
-    // correct word configs
-    setOne(['ONE', 'TWO', 'THREE', 'FOUR'])
-    setTwo(['APPLE', 'BANANA', 'GRAPE', 'PEAR'])
-    setThree(['SHIRT', 'PANTS', 'SOCKS', 'UNDERWEAR'])
-    setFour(['CPU', 'GPU', 'RAM', 'MOTHERBOARD'])
-
-    // calling for final shuffle (will change state)
+    // regex check for digit or space
+    if(/[\d]/.test(first)) {
+      return;
+    }
+    if(/[\d]/.test(second)) {
+      return;
+    }
+    if(/[\d]/.test(third)){
+      return;
+    }
+    if(/[\d]/.test(fourth)) {
+      return;
+    }
+    // adding strings and splitting into array (will handle multiple spaces if needed)
+    if(first.split(/\s+/).length > 4) {
+      return;
+    } else {
+      setOne(first.split(/\s+/))
+    }
+    if(second.split(/\s+/).length > 4) {
+      return;
+    } else {
+      setTwo(second.split(/\s+/))
+    } 
+    if(third.split(/\s+/).length > 4) {
+      return;
+    } else {
+      setThree(third.split(/\s+/))
+    }
+    if(fourth.split(/\s+/).length > 4) {
+      return;
+    } else {
+      setFour(fourth.split(/\s+/))
+    }
+    const tmp = (first + ' ' + second + ' ' + third + ' ' + fourth).split(/\s+/)
+    if(tmp.length > 16) {
+      return; // too many words
+    }
+    // setting out array
+    setOut(tmp)
+    // calling for final shuffle (will change state of words aswell)
     handleShuffle()
     // toggling page
     toggleChange()
@@ -32,7 +65,7 @@ export default function Editing({ setWords, setOne, setTwo, setThree, setFour, t
 
   // shuffle array for delivering words to playing
   function handleShuffle() {
-    let newArray = words.slice(); // Create a copy of the array
+    let newArray = out.slice(); // Create a copy of the array
     for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]]
@@ -48,23 +81,31 @@ export default function Editing({ setWords, setOne, setTwo, setThree, setFour, t
         <h2>{months[date.getMonth()]} {date.getDate()}, {date.getFullYear()}</h2>
       </div>
 
-      <div className='game-area'>
-        <ConnectButton value={words[0]} onConnectClick={() => handleClick(0)}/>
-        <ConnectButton value={words[1]} onConnectClick={() => handleClick(1)}/>
-        <ConnectButton value={words[2]} onConnectClick={() => handleClick(2)}/>
-        <ConnectButton value={words[3]} onConnectClick={() => handleClick(3)}/>
-        <ConnectButton value={words[4]} onConnectClick={() => handleClick(4)}/>
-        <ConnectButton value={words[5]} onConnectClick={() => handleClick(5)}/>
-        <ConnectButton value={words[6]} onConnectClick={() => handleClick(6)}/>
-        <ConnectButton value={words[7]} onConnectClick={() => handleClick(7)}/>
-        <ConnectButton value={words[8]} onConnectClick={() => handleClick(8)}/>
-        <ConnectButton value={words[9]} onConnectClick={() => handleClick(9)}/>
-        <ConnectButton value={words[10]} onConnectClick={() => handleClick(10)}/>
-        <ConnectButton value={words[11]} onConnectClick={() => handleClick(11)}/>
-        <ConnectButton value={words[12]} onConnectClick={() => handleClick(8)}/> 
-        <ConnectButton value={words[13]} onConnectClick={() => handleClick(9)}/>
-        <ConnectButton value={words[14]} onConnectClick={() => handleClick(10)}/>
-        <ConnectButton value={words[15]} onConnectClick={() => handleClick(11)}/>
+      <div className='game-area-edit'>
+        <div className='connect-row'>
+          <input 
+            placeholder='Entre 1st row (space separated) of 4 words'
+            onChange={(e) => setFirst(e.target.value)}
+          />
+        </div>
+        <div className='connect-row'>
+          <input 
+            placeholder='Entre 2nd row (space separated) of 4 words'
+            onChange={(e) => setSecond(e.target.value)}
+          />
+        </div>
+        <div className='connect-row'>
+          <input 
+            placeholder='Entre 3rd row (space separated) of 4 words'
+            onChange={(e) => setThird(e.target.value)}
+          />
+        </div>
+        <div className='connect-row'>
+          <input 
+            placeholder='Entre 4th row (space separated) of 4 words'
+            onChange={(e) => setFourth(e.target.value)}
+          />
+        </div>
       </div>
       <CreateButton handleCreate={handleCreate}/>
     </div>
@@ -77,16 +118,5 @@ function CreateButton( { handleCreate } ) {
     <div className='create-button'>
       <button onClick={handleCreate}>Create</button>
     </div>
-  );
-}
-
-function ConnectButton({ key, value, onConnectClick }) {
-  return (
-    <button 
-      className='connect-button'
-      onClick={onConnectClick}
-    >
-      {value}
-    </button>
   );
 }
