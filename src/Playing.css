@@ -1,4 +1,4 @@
-/* entire page */
+/* ----- GLOBAL ----- */
 .Playing {
     width: 100%;
     display: flex;
@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-/* heading */
+/* ----- HEADING AREA ----- */
 .heading-bar {
     height: 100px;
 }
@@ -15,17 +15,16 @@
     margin-top: 25px;
     font-size: 50px;
     font-weight: 900;
-    text-shadow: 0 0 4px blueviolet;
 }
 
-/* game area */
+/* ----- GAME AREA ----- */
 .game-area {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
 
-/* lives area */
+/* ----- LIVES REMAINING */
 .footer {
     margin-top: 10px;
 }
@@ -39,88 +38,95 @@
 }
 .livesLeft b {
     margin-right: 5px;
-    text-shadow: 0 0 4px blueviolet;
 }
-.dot {
+/* heart html text */
+.heart {
     font-size: 30px;
     color: #282c34;
 }
 
-/* bottom 3 buttons area */
+/* ----- BOTTOM BUTTONS ----- */
+/* all buttons */
 .bottom-buttons {
     display: flex;
     flex-direction: row;
 }
 .bottom-buttons button {
     transition: ease-in-out .2s;
+    background: none;
     width: 120px;
-    height: 40px;
+    height: 48px;
     border-style: solid;
-    border-radius: 10px;
+    border-width: 1px;
+    border-radius: 24px;
     margin-left: 5px;
     margin-right: 5px;
     font-size: 15px;
     font-weight: 600;
 }
-.shuffle-deselect button {
-    background:rgba(0, 0, 0, 0.05);
-    box-shadow: 0 0 4px blueviolet;
-}
-.shuffle-deselect button:hover {
+/* shuffle */
+.shuffle button {
     transition: ease-in-out .2s;
-    background: rgba(0, 0, 0, 0.4);
+}
+.shuffle button:hover {
+    transition: ease-in-out .2s;
     cursor: pointer;
 }
+/* deselect */
+.deselect-active {
+    transition: ease-in-out .2s;
+}
+.deselect-active:hover {
+    transition: ease-in-out .2s;
+    cursor: pointer;
+}
+.deselect-inactive {
+    opacity: 50%;
+}
+/* submit */
 .submit-active {
     transition: ease-in-out .2s;
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0 4px blueviolet;
     font-size: 15px;
     font-weight: 600;
 }
 .submit-active:hover {
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.4);
 }
 .submit-inactive {
     opacity: 50%;
     background: none;
-    box-shadow: 0 0 4px blueviolet;
 }
 
-/* connection box */
+/* ----- CONNECTION BOX ----- */
 .connect-button {
     transition: ease-in-out .2s;
-    background: rgba(0, 0, 0, 0.05);
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
-    font-size: 14px;
+    background: rgb(239, 239, 230);
+    border-radius: 6px;
+    border: none;
+    box-sizing: border-box;
+    font-size: 18px;
+    line-height: 16px;
     font-weight: 900;
+    height: 100px;
+    width: 130px;
+    margin: 4px;
 }
 .connect-button:hover {
-    transition: ease-in-out .2s;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.1); 
 }
 .connect-button-selected {
-    background: rgba(0, 0, 0, 0.5);
     transition: ease-in-out .2s;
-    height: 104px;
-    width: 134px;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: #4e5461;
-    padding: 0;
-    margin: 2px;
-    font-size: 14px;
-    font-weight: 900;
+    background: rgb(90, 89, 78);
+    color: white;
+    border-radius: 6px;
+    border: none;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    height: 100px;
+    width: 130px;
+    margin: 4px;
 }
 .connect-button-selected:hover {
     cursor: pointer;
