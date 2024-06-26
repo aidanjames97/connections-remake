@@ -33,3 +33,21 @@ code {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
+
+/* ----- CONNECT BOX ----- */
+.connect-button {
+  transition: ease-in-out .2s;
+  background: rgb(239, 239, 230);
+  border-radius: 6px;
+  border: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 900;
+  height: 100px;
+  width: 130px;
+  margin: 4px;
+  padding: 0;
+}
+.connect-button:hover {
+  cursor: pointer;
+}
